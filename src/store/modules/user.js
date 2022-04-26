@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/user'
+import { login, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
@@ -7,6 +7,7 @@ const getDefaultState = () => {
     token: getToken(),
     id: 0,
     name: '',
+    nickname: '',
     avatar: '',
     role: ''
   }
@@ -26,6 +27,9 @@ const mutations = {
   },
   SET_NAME: (state, name) => {
     state.name = name
+  },
+  SET_NICKNAME: (state, nickname) => {
+    state.nickname = nickname
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
@@ -60,9 +64,10 @@ const actions = {
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
-        const { id, username, role, avatar } = data
+        const { id, nickname, username, role, avatar } = data
         commit('SET_ID', id)
         commit('SET_NAME', username)
+        commit('SET_NICKNAME', nickname)
         commit('SET_ROLE', role)
         commit('SET_AVATAR', avatar || "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif")
         resolve(data)

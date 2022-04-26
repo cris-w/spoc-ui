@@ -33,13 +33,12 @@ router.beforeEach(async (to, from, next) => {
         try {
           // 获取用户角色
           const { role } = await store.dispatch('user/getInfo')
-
           // 通过角色生成动态路由
           const accessRoutes = await store.dispatch('permission/generateRoutes', role)
 
           // 将动态路由加入到路由中
           router.addRoutes(accessRoutes)
-          
+
           next({ ...to, replace: true })
         } catch (error) {
           // remove token and go to login page to re-login
