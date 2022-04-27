@@ -5,6 +5,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
+import { Tree } from 'element-ui'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -52,6 +53,18 @@ export const constantRoutes = [
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
       meta: { title: '主页', icon: 'dashboard' }
+    }]
+  },
+
+  {
+    path: '/setting',
+    component: Layout,
+    hidden: true,
+    children: [{
+      path: 'info',
+      name: 'Setting',
+      component: () => import('@/views/dashboard/setting'),
+      meta: { title: '设置' }
     }]
   },
 ]
@@ -136,6 +149,39 @@ export const asyncRoutes = [
         meta: { title: '批阅作业', roles: ['teacher'] }
       }
     ]
+  },
+
+  // 学生小组
+  {
+    path: '/student',
+    component: Layout,
+    redirect: '/student/index',
+    children: [{
+      path: 'index',
+      name: 'StudentIndex',
+      component: () => import('@/views/student/index'),
+      meta: { title: '我的小组', icon: 'el-icon-user', roles: ['student'] }
+    },
+    {
+      path: 'course/:id',
+      name: 'StudentCourse',
+      hidden: true,
+      component: () => import('@/views/student/course'),
+      meta: { title: '章节列表', roles: ['student'] }
+    }]
+  },
+
+  // 作业
+  {
+    path: '/homework',
+    component: Layout,
+    redirect: '/student/homework',
+    children: [{
+      path: 'homework',
+      name: 'Homework',
+      component: () => import('@/views/student/homework'),
+      meta: { title: '我的作业', icon: 'el-icon-tickets', roles: ['student'] }
+    }]
   },
 
 

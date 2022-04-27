@@ -9,6 +9,7 @@ const getDefaultState = () => {
     name: '',
     nickname: '',
     avatar: '',
+    password: '',
     role: ''
   }
 }
@@ -36,6 +37,9 @@ const mutations = {
   },
   SET_ROLE: (state, role) => {
     state.role = role
+  },
+  SET_PASSWORD: (state, password) => {
+    state.password = password
   }
 }
 
@@ -64,11 +68,12 @@ const actions = {
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
-        const { id, nickname, username, role, avatar } = data
+        const { id, nickname, username, role, avatar, password } = data
         commit('SET_ID', id)
         commit('SET_NAME', username)
         commit('SET_NICKNAME', nickname)
         commit('SET_ROLE', role)
+        commit('SET_PASSWORD', password)
         commit('SET_AVATAR', avatar || "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif")
         resolve(data)
       }).catch(error => {

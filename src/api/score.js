@@ -33,3 +33,20 @@ export function deleteById(id) {
         method: 'get'
     })
 }
+
+// 通过学生id查询已完成的作业ids
+export function listWorkedIds(id) {
+    return request({
+        url: `/score/listWorkIdByUserId/${id}`,
+        method: 'get'
+    })
+}
+
+// 提交作业
+export function submitWork(score) {
+    return request({
+        url: '/score/submitWork',
+        method: 'post',
+        data: score
+    })
+}

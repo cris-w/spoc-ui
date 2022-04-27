@@ -91,3 +91,11 @@ export function joinClass(classId, userIds) {
         data: userIds
     })
 }
+
+// 查询学生加入的小组
+export function listStudentClass(userId) {
+    return request({
+        url: `/classroom/listClassByStudentId/${userId}`,
+        method: 'get'
+    })
+}

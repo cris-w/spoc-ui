@@ -41,3 +41,11 @@ export function deleteById(id) {
         method: 'get'
     })
 }
+
+// 通过学生id 查询作业列表
+export function listWorkById(userId) {
+    return request({
+        url: `/work/listWorkByUserId/${userId}`,
+        method: 'get'
+    })
+}
